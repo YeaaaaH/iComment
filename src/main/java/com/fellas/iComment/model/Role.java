@@ -11,23 +11,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = "feedbacks")
+@Table(name = "roles")
 @Data
-public class FeedBack implements Serializable {
+public class Role implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private int rate;
-    private String positive;
-    private String negative;
-    private LocalDate date;
+    private String name;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "company_id")
-    private Company company;
 }
