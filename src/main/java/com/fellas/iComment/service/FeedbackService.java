@@ -17,7 +17,7 @@ public class FeedbackService {
         this.feedbackRepository = feedbackRepository;
     }
 
-    public Optional<FeedBack> getFeedbackById(long id) {
+    public Optional<FeedBack> findFeedbackById(long id) {
         return feedbackRepository.findById(id);
     }
 
@@ -25,7 +25,7 @@ public class FeedbackService {
         return feedbackRepository.save(feedBack);
     }
 
-    public String deleteFeedback(long id) {
+    public String deleteFeedbackById(long id) {
         feedbackRepository.deleteById(id);
         return "Feedback with id: " + id + "was deleted";
     }

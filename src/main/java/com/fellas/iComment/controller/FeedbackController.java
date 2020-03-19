@@ -24,7 +24,7 @@ public class FeedbackController {
 
     @GetMapping("{id}")
     public FeedBack getById(@PathVariable("id") long id) {
-        return service.getFeedbackById(id).get();
+        return service.findFeedbackById(id).get();
     }
 
     @GetMapping
@@ -39,6 +39,6 @@ public class FeedbackController {
 
     @DeleteMapping("{id}")
     public String delete(@PathVariable("id") long id) {
-        return service.deleteFeedback(id);
+        return service.deleteFeedbackById(id);
     }
 }
