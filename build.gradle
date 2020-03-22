@@ -30,4 +30,8 @@ dependencies {
 //	testImplementation 'org.springframework.security:spring-security-test'
 	compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
+	testImplementation group: 'com.h2database', name: 'h2', version: '1.4.197'
+	testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+	testCompileOnly 'org.projectlombok:lombok:1.18.12'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
 }

@@ -4,11 +4,13 @@ import com.fellas.iComment.model.Role;
 import com.fellas.iComment.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class RoleService {
 
     private final RoleRepository roleRepository;
@@ -17,8 +19,8 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-    public Optional<Role> findRoleById(long id) {
-        return roleRepository.findById(id);
+    public Role findRoleById(long id) {
+        return roleRepository.findById(id).get();
     }
 
     public Role saveRole(Role role) {

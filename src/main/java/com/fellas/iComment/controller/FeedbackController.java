@@ -24,7 +24,7 @@ public class FeedbackController {
 
     @GetMapping("{id}")
     public FeedBack getById(@PathVariable("id") long id) {
-        return service.findFeedbackById(id).get();
+        return service.findFeedbackById(id);
     }
 
     @GetMapping

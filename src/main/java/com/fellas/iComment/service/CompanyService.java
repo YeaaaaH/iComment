@@ -4,11 +4,13 @@ import com.fellas.iComment.model.Company;
 import com.fellas.iComment.repository.CompanyRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
@@ -17,8 +19,8 @@ public class CompanyService {
         this.companyRepository = companyRepository;
     }
 
-    public Optional<Company> findCompanyById(long id) {
-        return companyRepository.findById(id);
+    public Company findCompanyById(long id) {
+        return companyRepository.findById(id).get();
     }
 
     public Company saveCompany(Company company) {

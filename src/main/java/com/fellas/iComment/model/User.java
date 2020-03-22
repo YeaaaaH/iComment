@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 @Data
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String login;
     private String password;
@@ -29,8 +28,6 @@ public class User implements Serializable {
     @Column(name = "surname")
     private String surName;
     private String email;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<FeedBack> feedBacks;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
             name = "users_roles",

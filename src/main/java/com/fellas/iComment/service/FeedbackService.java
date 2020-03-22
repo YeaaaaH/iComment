@@ -4,11 +4,12 @@ import com.fellas.iComment.model.FeedBack;
 import com.fellas.iComment.repository.FeedbackRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@Transactional
 public class FeedbackService {
 
     private final FeedbackRepository feedbackRepository;
@@ -17,8 +18,8 @@ public class FeedbackService {
         this.feedbackRepository = feedbackRepository;
     }
 
-    public Optional<FeedBack> findFeedbackById(long id) {
-        return feedbackRepository.findById(id);
+    public FeedBack findFeedbackById(long id) {
+        return feedbackRepository.findById(id).get();
     }
 
     public FeedBack saveFeedback(FeedBack feedBack) {
