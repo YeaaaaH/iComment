@@ -1,8 +1,0 @@
-package com.fellas.iComment.repository;
-
-import com.fellas.iComment.model.Company;
-import org.springframework.data.repository.CrudRepository;
-
-public interface CompanyRepository extends CrudRepository<Company, Long> {
-
-}
