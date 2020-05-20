@@ -1,7 +1,7 @@
-package com.fellas.iComment.service;
+package com.fellas.categoryservice.service;
 
-import com.fellas.iComment.model.Company;
-import com.fellas.iComment.repository.CompanyRepository;
+import com.fellas.categoryservice.model.Company;
+import com.fellas.categoryservice.repository.CompanyRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
