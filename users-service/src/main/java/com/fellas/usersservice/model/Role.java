@@ -1,4 +1,4 @@
-package com.fellas.categoryservice.model;
+package com.fellas.usersservice.model;
 
 import lombok.Data;
 
@@ -10,12 +10,11 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "roles")
 @Data
-public class Category implements Serializable {
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String description;
 }

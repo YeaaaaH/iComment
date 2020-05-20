@@ -1,7 +1,7 @@
-package com.fellas.iComment.service;
+package com.fellas.usersservice.service;
 
-import com.fellas.iComment.model.Role;
-import com.fellas.iComment.repository.RoleRepository;
+import com.fellas.usersservice.model.Role;
+import com.fellas.usersservice.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

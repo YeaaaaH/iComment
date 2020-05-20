@@ -1,7 +1,7 @@
-package com.fellas.categoryservice.controller;
+package com.fellas.usersservice.controller;
 
-import com.fellas.categoryservice.model.Category;
-import com.fellas.categoryservice.service.CategoryService;
+import com.fellas.usersservice.model.User;
+import com.fellas.usersservice.service.UserService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,32 +13,31 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("category")
-public class CategoryController {
+@RequestMapping("users")
+public class UserController {
+    private final UserService service;
 
-    private final CategoryService service;
-
-    public CategoryController(CategoryService service) {
+    public UserController(UserService service) {
         this.service = service;
     }
 
     @GetMapping("{id}")
-    public Category getById(@PathVariable("id") long id) {
-        return service.findCategoryById(id);
+    public User getById(@PathVariable("id") long id) {
+        return service.findUserById(id);
     }
 
     @GetMapping
-    public List<Category> getAllCategories() {
-        return service.getAll();
+    public List<User> getAllUsers() {
+        return service.getAllUsers();
     }
 
     @PostMapping
-    public Category create(@RequestBody Category category) {
-        return service.saveCategory(category);
+    public User create(@RequestBody User user) {
+        return service.saveUser(user);
     }
 
     @DeleteMapping("{id}")
     public String delete(@PathVariable("id") long id) {
-        return service.deleteCategoryById(id);
+        return service.deleteUserById(id);
     }
 }

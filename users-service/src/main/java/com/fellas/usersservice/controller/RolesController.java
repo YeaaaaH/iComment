@@ -1,7 +1,7 @@
-package com.fellas.categoryservice.controller;
+package com.fellas.usersservice.controller;
 
-import com.fellas.categoryservice.model.Category;
-import com.fellas.categoryservice.service.CategoryService;
+import com.fellas.usersservice.model.Role;
+import com.fellas.usersservice.service.RoleService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,32 +13,32 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("category")
-public class CategoryController {
+@RequestMapping("roles")
+public class RolesController {
 
-    private final CategoryService service;
+    private final RoleService service;
 
-    public CategoryController(CategoryService service) {
+    public RolesController(RoleService service) {
         this.service = service;
     }
 
     @GetMapping("{id}")
-    public Category getById(@PathVariable("id") long id) {
-        return service.findCategoryById(id);
+    public Role getById(@PathVariable("id") long id) {
+        return service.findRoleById(id);
     }
 
     @GetMapping
-    public List<Category> getAllCategories() {
-        return service.getAll();
+    public List<Role> getAllRoles() {
+        return service.getAllRoles();
     }
 
     @PostMapping
-    public Category create(@RequestBody Category category) {
-        return service.saveCategory(category);
+    public Role create(@RequestBody Role role) {
+        return service.saveRole(role);
     }
 
     @DeleteMapping("{id}")
     public String delete(@PathVariable("id") long id) {
-        return service.deleteCategoryById(id);
+        return service.deleteRoleById(id);
     }
 }
