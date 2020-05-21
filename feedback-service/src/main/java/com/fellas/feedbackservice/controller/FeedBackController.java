@@ -26,7 +26,7 @@ public class FeedBackController {
         return service.findFeedbackById(id);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<FeedBack> getAllFeedBacks() {
         return service.getAll();
     }

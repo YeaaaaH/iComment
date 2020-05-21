@@ -10,5 +10,5 @@ public class Company implements Serializable {
     private String name;
     private String description;
     private Double averageRate;
-    private long category_id;
+    private Category category;
 }

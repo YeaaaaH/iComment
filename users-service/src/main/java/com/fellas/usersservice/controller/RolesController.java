@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("roles")
+@RequestMapping("role")
 public class RolesController {
 
     private final RoleService service;
@@ -27,7 +27,7 @@ public class RolesController {
         return service.findRoleById(id);
     }
 
-    @GetMapping
+    @GetMapping("all")
     public List<Role> getAllRoles() {
         return service.getAllRoles();
     }

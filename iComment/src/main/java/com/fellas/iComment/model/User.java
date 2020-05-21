@@ -13,5 +13,5 @@ public class User implements Serializable {
     private String name;
     private String surName;
     private String email;
-    private List<Long> role_ids;
+    private List<Role> roles;
 }
