@@ -27,4 +27,9 @@ public class CategoryController {
     public Category getCategoryById(@PathVariable("id") long id){
         return categoryService.getCategoryById(id);
     }
+
+    @GetMapping("all")
+    public List<Category> getAllCategories(){
+        return categoryService.getAllCategories();
+    }
 }

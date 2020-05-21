@@ -5,6 +5,8 @@ import com.fellas.iComment.model.Company;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class CompanyService {
 
@@ -18,4 +20,7 @@ public class CompanyService {
         return restTemplate.getForObject("http://localhost:8081/company/" + id, Company.class);
     }
 
+    public List<Company> getAllCompanies(){
+        return restTemplate.getForObject("http://localhost:8081/company/all", List.class);
+    }
 }

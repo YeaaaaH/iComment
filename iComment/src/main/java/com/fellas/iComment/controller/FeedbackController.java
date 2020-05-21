@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("feedback")
 public class FeedbackController {
@@ -23,5 +25,10 @@ public class FeedbackController {
     @GetMapping("{id}")
     public FeedBack getCompanyById(@PathVariable("id") long id) {
         return feedbackService.getFeedBackById(id);
+    }
+
+    @GetMapping("all")
+    public List<FeedBack> getCompanyById() {
+        return feedbackService.getAllFeedBacks();
     }
 }
