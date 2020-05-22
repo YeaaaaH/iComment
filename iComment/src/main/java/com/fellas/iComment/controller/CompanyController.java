@@ -1,8 +1,8 @@
 package com.fellas.iComment.controller;
 
-import com.fellas.iComment.model.Category;
 import com.fellas.iComment.model.Company;
 import com.fellas.iComment.service.CompanyService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,5 +31,10 @@ public class CompanyController {
     @GetMapping("all")
     public List<Company> getAllCompanies(){
         return companyService.getAllCompanies();
+    }
+
+    @PostMapping("create")
+    public ResponseEntity<Company> createCompany(@RequestBody Company company) {
+        return companyService.createCompany(company);
     }
 }

@@ -1,8 +1,8 @@
 package com.fellas.iComment.controller;
 
 import com.fellas.iComment.model.User;
-import com.fellas.iComment.service.RoleService;
 import com.fellas.iComment.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,5 +30,10 @@ public class UserController {
     @GetMapping("all")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @PostMapping("create")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 }

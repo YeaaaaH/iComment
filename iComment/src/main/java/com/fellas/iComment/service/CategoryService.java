@@ -1,6 +1,8 @@
 package com.fellas.iComment.service;
 
 import com.fellas.iComment.model.Category;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,4 +25,8 @@ public class CategoryService {
         return restTemplate.getForObject("http://localhost:8081/category/all", List.class);
     }
 
+    public ResponseEntity<Category> createCategory(Category category){
+        HttpEntity<Category> request = new HttpEntity<>(category);
+        return restTemplate.postForEntity("http://localhost:8081/category/create", request, Category.class);
+    }
 }

@@ -11,8 +11,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,18 +33,18 @@ public class FeedbackServiceTest {
 
     @Test
     public void getAllFeedbacksTest() {
-        assertThat(feedbackService.getAll(), notNullValue());
-        assertThat(feedbackService.getAll().size(), is(1));
-        assertThat(feedbackService.getAll().get(0), isA(FeedBack.class));
+        assertThat(feedbackService.getAllFeedBacks(), notNullValue());
+        assertThat(feedbackService.getAllFeedBacks().size(), is(1));
+        assertThat(feedbackService.getAllFeedBacks().get(0), isA(FeedBack.class));
     }
 
     @Test
     public void findFeedBackByIdTest() {
-        assertThat(feedbackService.findFeedbackById(0l), notNullValue());
-        assertThat(feedbackService.findFeedbackById(0l), isA(FeedBack.class));
-        assertThat(feedbackService.findFeedbackById(0l).getRate(), is(4));
-        assertThat(feedbackService.findFeedbackById(0l).getNegative(), is("NEGATIVE"));
-        assertThat(feedbackService.findFeedbackById(0l).getPositive(), is("POSITIVE"));
+        assertThat(feedbackService.getFeedBackById(0L), notNullValue());
+        assertThat(feedbackService.getFeedBackById(0L), isA(FeedBack.class));
+        assertThat(feedbackService.getFeedBackById(0L).getRate(), is(4));
+        assertThat(feedbackService.getFeedBackById(0L).getNegative(), is("NEGATIVE"));
+        assertThat(feedbackService.getFeedBackById(0L).getPositive(), is("POSITIVE"));
     }
 
     private void init() {
@@ -71,11 +71,11 @@ public class FeedbackServiceTest {
         user.setRoles(roles);
 
         FeedBack feedBack = new FeedBack();
-        feedBack.setCompany(company);
+        feedBack.setCompany_id(0);
         feedBack.setDate(of(2020, 3, 22));
         feedBack.setNegative("NEGATIVE");
         feedBack.setPositive("POSITIVE");
         feedBack.setRate(4);
-        feedBack.setUser(user);
+        feedBack.setUser_id(0);
     }
 }
