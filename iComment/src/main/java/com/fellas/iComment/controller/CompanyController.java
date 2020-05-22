@@ -37,4 +37,9 @@ public class CompanyController {
     public ResponseEntity<Company> createCompany(@RequestBody Company company) {
         return companyService.createCompany(company);
     }
+
+    @PostMapping("update")
+    public ResponseEntity<Company> updateCompany(@RequestBody Company company) {
+        return companyService.updateCompany(company);
+    }
 }

@@ -31,8 +31,13 @@ public class FeedBackController {
         return service.getAll();
     }
 
-    @PostMapping
+    @PostMapping("create")
     public FeedBack create(@RequestBody FeedBack feedBack) {
+        return service.saveFeedback(feedBack);
+    }
+
+    @PostMapping("update")
+    public FeedBack update(@RequestBody FeedBack feedBack) {
         return service.saveFeedback(feedBack);
     }
 

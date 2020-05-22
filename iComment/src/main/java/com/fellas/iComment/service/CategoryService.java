@@ -2,6 +2,7 @@ package com.fellas.iComment.service;
 
 import com.fellas.iComment.model.Category;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,5 +29,10 @@ public class CategoryService {
     public ResponseEntity<Category> createCategory(Category category){
         HttpEntity<Category> request = new HttpEntity<>(category);
         return restTemplate.postForEntity("http://localhost:8081/category/create", request, Category.class);
+    }
+
+    public ResponseEntity<Category> updateCategory(Category category){
+        HttpEntity<Category> request = new HttpEntity<>(category);
+        return restTemplate.exchange("http://localhost:8081/category/update", HttpMethod.PUT, request, Category.class);
     }
 }

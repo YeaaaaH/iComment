@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,8 +33,13 @@ public class RolesController {
         return service.getAllRoles();
     }
 
-    @PostMapping
+    @PostMapping("create")
     public Role create(@RequestBody Role role) {
+        return service.saveRole(role);
+    }
+
+    @PutMapping("update")
+    public Role update(@RequestBody Role role) {
         return service.saveRole(role);
     }
 

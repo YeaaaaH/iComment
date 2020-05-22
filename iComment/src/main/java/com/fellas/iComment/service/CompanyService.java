@@ -2,6 +2,7 @@ package com.fellas.iComment.service;
 
 import com.fellas.iComment.model.Company;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,5 +29,10 @@ public class CompanyService {
     public ResponseEntity<Company> createCompany(Company company){
         HttpEntity<Company> request = new HttpEntity<>(company);
         return restTemplate.postForEntity("http://localhost:8081/company/create", request, Company.class);
+    }
+
+    public ResponseEntity<Company> updateCompany(Company company){
+        HttpEntity<Company> request = new HttpEntity<>(company);
+        return restTemplate.exchange("http://localhost:8081/company/update", HttpMethod.PUT, request, Company.class);
     }
 }

@@ -23,7 +23,7 @@ public class Company implements Serializable {
     private String name;
     private String description;
     private Double averageRate;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 }
