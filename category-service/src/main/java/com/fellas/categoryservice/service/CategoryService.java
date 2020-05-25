@@ -1,7 +1,10 @@
 package com.fellas.categoryservice.service;
 
+import com.fellas.categoryservice.exception.CategoryNotFoundException;
 import com.fellas.categoryservice.model.Category;
 import com.fellas.categoryservice.repository.CategoryRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,17 +21,19 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Category findCategoryById(long id) {
-        return categoryRepository.findById(id).get();
+    public Category findCategoryById(long id) throws CategoryNotFoundException {
+        return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException("Category with id " + id + " had not been found"));
     }
 
     public Category saveCategory(Category category) {
         return categoryRepository.save(category);
     }
 
-    public String deleteCategoryById(long id) {
-        categoryRepository.deleteById(id);
-        return "Category with id: " + id + "was deleted";
+    public ResponseEntity<String> deleteCategoryById(long id) throws CategoryNotFoundException {
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException("Category with id " + id + " had not been found"));
+        categoryRepository.delete(category);
+        return ResponseEntity.status(HttpStatus.OK).body("Category with id " + id + " had been deleted");
     }
 
     public List<Category> getAll() {

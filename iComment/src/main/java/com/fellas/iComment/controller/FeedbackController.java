@@ -3,6 +3,7 @@ package com.fellas.iComment.controller;
 import com.fellas.iComment.model.FeedBack;
 import com.fellas.iComment.service.FeedbackService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("feedback")
+@RequestMapping("api/feedback")
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
@@ -40,6 +41,11 @@ public class FeedbackController {
 
     @PutMapping("update")
     public ResponseEntity<FeedBack> updateFeedback(@RequestBody FeedBack feedBack) {
-        return feedbackService.createFeedback(feedBack);
+        return feedbackService.updateFeedback(feedBack);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteFeedBack(@PathVariable long id) {
+        return feedbackService.deleteFeedBackById(id);
     }
 }

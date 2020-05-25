@@ -3,6 +3,7 @@ package com.fellas.iComment.controller;
 import com.fellas.iComment.model.Role;
 import com.fellas.iComment.service.RoleService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("role")
+@RequestMapping("api/role")
 public class RolesController {
     private final RoleService roleService;
 
@@ -40,5 +41,10 @@ public class RolesController {
     @PutMapping("update")
     public ResponseEntity<Role> updateRole(@RequestBody Role role) {
         return roleService.updateRole(role);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteRoleById(@PathVariable long id) {
+        return roleService.deleteRoleById(id);
     }
 }

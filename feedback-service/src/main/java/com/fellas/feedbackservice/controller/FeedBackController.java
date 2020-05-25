@@ -1,11 +1,14 @@
 package com.fellas.feedbackservice.controller;
 
+import com.fellas.feedbackservice.exception.FeedbackNotFoundException;
 import com.fellas.feedbackservice.model.FeedBack;
 import com.fellas.feedbackservice.service.FeedBackService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +25,7 @@ public class FeedBackController {
     }
 
     @GetMapping("{id}")
-    public FeedBack getById(@PathVariable("id") long id) {
+    public FeedBack getById(@PathVariable("id") long id) throws FeedbackNotFoundException {
         return service.findFeedbackById(id);
     }
 
@@ -36,13 +39,13 @@ public class FeedBackController {
         return service.saveFeedback(feedBack);
     }
 
-    @PostMapping("update")
+    @PutMapping("update")
     public FeedBack update(@RequestBody FeedBack feedBack) {
         return service.saveFeedback(feedBack);
     }
 
     @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") long id) {
-        return service.deleteFeedbackById(id);
+    public ResponseEntity<String> delete(@PathVariable("id") long id) throws FeedbackNotFoundException {
+        return service.deleteFeedBackById(id);
     }
 }

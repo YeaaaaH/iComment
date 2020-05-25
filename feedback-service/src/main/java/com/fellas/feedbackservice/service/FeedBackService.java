@@ -1,7 +1,10 @@
 package com.fellas.feedbackservice.service;
 
+import com.fellas.feedbackservice.exception.FeedbackNotFoundException;
 import com.fellas.feedbackservice.model.FeedBack;
 import com.fellas.feedbackservice.repository.FeedBackRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,17 +21,19 @@ public class FeedBackService {
         this.feedbackRepository = feedbackRepository;
     }
 
-    public FeedBack findFeedbackById(long id) {
-        return feedbackRepository.findById(id).get();
+    public FeedBack findFeedbackById(long id) throws FeedbackNotFoundException {
+        return feedbackRepository.findById(id).orElseThrow(() -> new FeedbackNotFoundException("Feedback with id " + id + " had not been found"));
     }
 
     public FeedBack saveFeedback(FeedBack feedBack) {
         return feedbackRepository.save(feedBack);
     }
 
-    public String deleteFeedbackById(long id) {
-        feedbackRepository.deleteById(id);
-        return "Feedback with id: " + id + "was deleted";
+    public ResponseEntity<String> deleteFeedBackById(long id) throws FeedbackNotFoundException {
+        FeedBack company = feedbackRepository.findById(id)
+                .orElseThrow(() -> new FeedbackNotFoundException("Feedback with id " + id + " had not been found"));
+        feedbackRepository.delete(company);
+        return ResponseEntity.status(HttpStatus.OK).body("Feedback with id " + id +" had been deleted");
     }
 
     public List<FeedBack> getAll() {

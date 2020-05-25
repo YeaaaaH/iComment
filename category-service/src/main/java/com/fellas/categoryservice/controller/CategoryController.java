@@ -1,8 +1,9 @@
 package com.fellas.categoryservice.controller;
 
+import com.fellas.categoryservice.exception.CategoryNotFoundException;
 import com.fellas.categoryservice.model.Category;
-import com.fellas.categoryservice.model.Company;
 import com.fellas.categoryservice.service.CategoryService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class CategoryController {
     }
 
     @GetMapping("{id}")
-    public Category getById(@PathVariable("id") long id) {
+    public Category getById(@PathVariable("id") long id) throws CategoryNotFoundException {
         return service.findCategoryById(id);
     }
 
@@ -38,7 +39,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") long id) {
+    public ResponseEntity<String> delete(@PathVariable("id") long id) throws CategoryNotFoundException {
         return service.deleteCategoryById(id);
     }
 }

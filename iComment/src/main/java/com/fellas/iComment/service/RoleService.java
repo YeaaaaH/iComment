@@ -3,8 +3,10 @@ package com.fellas.iComment.service;
 import com.fellas.iComment.model.Role;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -26,13 +28,22 @@ public class RoleService {
         return restTemplate.getForObject("http://localhost:8082/role/all", List.class);
     }
 
-    public ResponseEntity<Role> createRole(Role role){
+    public ResponseEntity<Role> createRole(Role role) {
         HttpEntity<Role> request = new HttpEntity<>(role);
         return restTemplate.postForEntity("http://localhost:8082/role/create", request, Role.class);
     }
 
-    public ResponseEntity<Role> updateRole(Role role){
+    public ResponseEntity<Role> updateRole(Role role) {
         HttpEntity<Role> request = new HttpEntity<>(role);
         return restTemplate.exchange("http://localhost:8082/role/update", HttpMethod.PUT, request, Role.class);
+    }
+
+    public ResponseEntity<String> deleteRoleById(long id) {
+        try {
+            restTemplate.delete("http://localhost:8082/role/" + id);
+            return ResponseEntity.status(HttpStatus.OK).body("Role with id " + id + " had been deleted");
+        } catch (HttpClientErrorException exception) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Response from server: " + exception.getStatusCode().toString());
+        }
     }
 }

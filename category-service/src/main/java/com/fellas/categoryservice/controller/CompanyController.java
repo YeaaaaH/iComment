@@ -1,7 +1,9 @@
 package com.fellas.categoryservice.controller;
 
+import com.fellas.categoryservice.exception.CompanyNotFoundException;
 import com.fellas.categoryservice.model.Company;
 import com.fellas.categoryservice.service.CompanyService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public class CompanyController {
     }
 
     @GetMapping("{id}")
-    public Company getById(@PathVariable("id") long id) {
+    public Company getById(@PathVariable("id") long id) throws CompanyNotFoundException {
         return service.findCompanyById(id);
     }
 
@@ -36,7 +38,7 @@ public class CompanyController {
     }
 
     @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") long id) {
+    public ResponseEntity<String> delete(@PathVariable("id") long id) throws CompanyNotFoundException {
         return service.deleteCompanyById(id);
     }
 }

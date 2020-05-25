@@ -3,6 +3,7 @@ package com.fellas.iComment.controller;
 import com.fellas.iComment.model.Category;
 import com.fellas.iComment.service.CategoryService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("category")
+@RequestMapping("api/category")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -24,12 +25,12 @@ public class CategoryController {
     }
 
     @GetMapping("{id}")
-    public Category getCategoryById(@PathVariable("id") long id){
+    public Category getCategoryById(@PathVariable("id") long id) {
         return categoryService.getCategoryById(id);
     }
 
     @GetMapping("all")
-    public List<Category> getAllCategories(){
+    public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
 
@@ -41,5 +42,10 @@ public class CategoryController {
     @PutMapping("update")
     public ResponseEntity<Category> updateCategory(@RequestBody Category category) {
         return categoryService.updateCategory(category);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable long id) {
+        return categoryService.deleteCategoryById(id);
     }
 }

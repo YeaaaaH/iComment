@@ -1,7 +1,10 @@
 package com.fellas.usersservice.controller;
 
+import com.fellas.usersservice.exception.RoleNotFoundException;
+import com.fellas.usersservice.exception.UserNotFoundException;
 import com.fellas.usersservice.model.User;
 import com.fellas.usersservice.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public User getById(@PathVariable("id") long id) {
+    public User getById(@PathVariable("id") long id) throws UserNotFoundException {
         return service.findUserById(id);
     }
 
@@ -43,7 +46,7 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public String delete(@PathVariable("id") long id) {
+    public ResponseEntity<String> delete(@PathVariable("id") long id) throws UserNotFoundException {
         return service.deleteUserById(id);
     }
 }
