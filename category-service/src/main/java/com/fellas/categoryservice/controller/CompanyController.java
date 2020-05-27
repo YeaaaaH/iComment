@@ -4,7 +4,14 @@ import com.fellas.categoryservice.exception.CompanyNotFoundException;
 import com.fellas.categoryservice.model.Company;
 import com.fellas.categoryservice.service.CompanyService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,6 +32,11 @@ public class CompanyController {
     @GetMapping("all")
     public List<Company> getAllCompanies() {
         return service.getAll();
+    }
+
+    @GetMapping("category/{categoryName}")
+    public List<Company> getCompaniesByCategoryName(@PathVariable("categoryName") String categoryName) throws CompanyNotFoundException {
+        return service.findCompaniesByCategoryName(categoryName);
     }
 
     @PostMapping("create")

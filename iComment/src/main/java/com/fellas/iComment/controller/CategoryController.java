@@ -34,6 +34,11 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
+    @GetMapping("name/{categoryName}")
+    public Category getCompaniesByCategoryName(@PathVariable("categoryName") String categoryName) {
+        return categoryService.getCategoryByName(categoryName);
+    }
+
     @PostMapping("create")
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
         return categoryService.createCategory(category);

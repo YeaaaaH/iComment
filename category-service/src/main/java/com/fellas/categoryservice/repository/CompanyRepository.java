@@ -1,8 +1,11 @@
 package com.fellas.categoryservice.repository;
 
+import com.fellas.categoryservice.model.Category;
 import com.fellas.categoryservice.model.Company;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CompanyRepository extends CrudRepository<Company, Long> {
+import java.util.List;
 
+public interface CompanyRepository extends CrudRepository<Company, Long> {
+    List<Company> findCompaniesByCategory(Category category);
 }

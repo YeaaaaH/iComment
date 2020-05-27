@@ -34,6 +34,11 @@ public class CompanyController {
         return companyService.getAllCompanies();
     }
 
+    @GetMapping("category/{categoryName}")
+    public List<Company> getCompaniesByCategoryName(@PathVariable("categoryName") String categoryName) {
+        return companyService.getCompaniesByCategoryName(categoryName);
+    }
+
     @PostMapping("create")
     public ResponseEntity<Company> createCompany(@RequestBody Company company) {
         return companyService.createCompany(company);

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,11 +22,23 @@ public class CompanyService {
     }
 
     public Company getCompanyById(long id) {
-        return restTemplate.getForObject("http://localhost:8081/company/" + id, Company.class);
+        try {
+            return restTemplate.getForObject("http://localhost:8081/company/" + id, Company.class);
+        } catch (HttpClientErrorException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from category-service: " + exception.getStatusCode());
+        }
     }
 
     public List<Company> getAllCompanies() {
         return restTemplate.getForObject("http://localhost:8081/company/all", List.class);
+    }
+
+    public List<Company> getCompaniesByCategoryName(String categoryName) throws ResponseStatusException {
+        try {
+            return restTemplate.getForObject("http://localhost:8081/company/category/" + categoryName, List.class);
+        } catch (HttpClientErrorException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from category-service: " + exception.getStatusCode());
+        }
     }
 
     public ResponseEntity<Company> createCompany(Company company) {
@@ -43,7 +56,7 @@ public class CompanyService {
             restTemplate.delete("http://localhost:8081/company/" + id);
             return ResponseEntity.status(HttpStatus.OK).body("Company with id " + id + " had been deleted");
         } catch (HttpClientErrorException exception) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Response from server: " + exception.getStatusCode().toString());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Response from category-service: " + exception.getStatusCode().toString());
         }
     }
 }

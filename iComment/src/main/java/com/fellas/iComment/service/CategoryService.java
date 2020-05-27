@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,11 +22,23 @@ public class CategoryService {
     }
 
     public Category getCategoryById(long id) {
-        return restTemplate.getForObject("http://localhost:8081/category/" + id, Category.class);
+        try{
+            return restTemplate.getForObject("http://localhost:8081/category/" + id, Category.class);
+        } catch (HttpClientErrorException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from category-service: " + exception.getStatusCode());
+        }
     }
 
     public List<Category> getAllCategories() {
         return restTemplate.getForObject("http://localhost:8081/category/all", List.class);
+    }
+
+    public Category getCategoryByName(String categoryName) throws ResponseStatusException {
+        try {
+            return restTemplate.getForObject("http://localhost:8081/category/name/" + categoryName, Category.class);
+        } catch (HttpClientErrorException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from category-service: " + exception.getStatusCode());
+        }
     }
 
     public ResponseEntity<Category> createCategory(Category category) {
@@ -43,7 +56,7 @@ public class CategoryService {
             restTemplate.delete("http://localhost:8081/category/" + id);
             return ResponseEntity.status(HttpStatus.OK).body("Category with id " + id + " had been deleted");
         } catch (HttpClientErrorException exception) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Response from server: " + exception.getStatusCode().toString());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Response from category-service: " + exception.getStatusCode().toString());
         }
     }
 }
