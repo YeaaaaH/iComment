@@ -25,6 +25,12 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User with id " + id + " han not been found"));
     }
 
+    public List<User> getAllUsers() {
+        List<User> list = new ArrayList<>();
+        userRepository.findAll().forEach(list::add);
+        return list;
+    }
+
     public User saveUser(User user) {
         return userRepository.save(user);
     }
@@ -34,11 +40,5 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User with id " + id + " had not been found"));
         userRepository.delete(user);
         return ResponseEntity.status(HttpStatus.OK).body("User with id " + id + " had been deleted");
-    }
-
-    public List<User> getAllUsers() {
-        List<User> list = new ArrayList<>();
-        userRepository.findAll().forEach(list::add);
-        return list;
     }
 }
