@@ -2,11 +2,11 @@ package com.fellas.usersservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,7 +17,6 @@ import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users",
@@ -29,10 +28,8 @@ import java.util.UUID;
 @Data
 public class User implements Serializable {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", columnDefinition = "VARCHAR(255)")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "login")
     private String login;
     private String password;
@@ -47,6 +44,7 @@ public class User implements Serializable {
     private LocalDate birthDay;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate registrationDate;
+    private String avatarLink;
     @ManyToMany()
     @JoinTable(
             name = "users_roles",

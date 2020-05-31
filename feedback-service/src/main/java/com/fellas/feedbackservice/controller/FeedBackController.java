@@ -34,6 +34,11 @@ public class FeedBackController {
         return service.getAll();
     }
 
+    @GetMapping("company/{id}")
+    public List<FeedBack> getFeedBacksByCompanyId(@PathVariable("id") long id) {
+        return service.getAllByCompanyId(id);
+    }
+
     @PostMapping("create")
     public FeedBack create(@RequestBody FeedBack feedBack) {
         return service.saveFeedback(feedBack);

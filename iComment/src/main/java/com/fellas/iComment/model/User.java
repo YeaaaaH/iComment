@@ -13,5 +13,9 @@ public class User implements Serializable {
     private String name;
     private String surName;
     private String email;
+    private String gender;
+    private String birthDay;
+    private String registrationDate;
+    private String avatarLink;
     private List<Role> roles;
 }

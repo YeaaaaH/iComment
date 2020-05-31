@@ -34,6 +34,11 @@ public class FeedbackController {
         return feedbackService.getAllFeedBacks();
     }
 
+    @GetMapping("company/{id}")
+    public List<FeedBack> getFeedBacksByCompanyId(@PathVariable("id") long id) {
+        return feedbackService.getAllFeedbacksByCompanyId(id);
+    }
+
     @PostMapping("create")
     public ResponseEntity<FeedBack> createFeedback(@RequestBody FeedBack feedBack) {
         return feedbackService.createFeedback(feedBack);

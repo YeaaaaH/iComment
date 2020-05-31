@@ -1,5 +1,6 @@
 package com.fellas.feedbackservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -18,8 +19,11 @@ public class FeedBack implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int rate;
+    private String title;
+    private String description;
     private String positive;
     private String negative;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     private long user_id;
     private long company_id;

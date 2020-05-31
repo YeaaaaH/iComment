@@ -9,9 +9,11 @@ import java.time.LocalDate;
 public class FeedBack implements Serializable {
     private long id;
     private int rate;
+    private String title;
+    private String description;
     private String positive;
     private String negative;
-    private LocalDate date;
+    private String date;
     private long user_id;
     private long company_id;
 }

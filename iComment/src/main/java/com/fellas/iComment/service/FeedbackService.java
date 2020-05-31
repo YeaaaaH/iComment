@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,11 +22,19 @@ public class FeedbackService {
     }
 
     public FeedBack getFeedBackById(long id) {
-        return restTemplate.getForObject("http://localhost:8083/feedback/" + id, FeedBack.class);
+        try {
+            return restTemplate.getForObject("http://localhost:8083/feedback/" + id, FeedBack.class);
+        } catch (HttpClientErrorException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from user-service: " + exception.getStatusCode());
+        }
     }
 
     public List<FeedBack> getAllFeedBacks() {
         return restTemplate.getForObject("http://localhost:8083/feedback/all", List.class);
+    }
+
+    public List<FeedBack> getAllFeedbacksByCompanyId(long id) {
+        return restTemplate.getForObject("http://localhost:8083/feedback/company/" + id, List.class);
     }
 
     public ResponseEntity<FeedBack> createFeedback(FeedBack feedBack) {

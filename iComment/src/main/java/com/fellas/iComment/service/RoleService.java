@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,7 +22,11 @@ public class RoleService {
     }
 
     public Role getRoleById(long id) {
-        return restTemplate.getForObject("http://localhost:8082/role/" + id, Role.class);
+        try {
+            return restTemplate.getForObject("http://localhost:8082/role/" + id, Role.class);
+        } catch (HttpClientErrorException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Response from user-service: " + exception.getStatusCode());
+        }
     }
 
     public List<Role> getAllRoles() {
