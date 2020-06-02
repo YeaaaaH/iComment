@@ -1,0 +1,21 @@
+version: '2'
+services:
+  app:
+    container_name: category-service
+    image: category-service
+    build: ./
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+  db:
+    container_name: category-service_DB
+    image: library/postgres
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    ports:
+      - "5433:5433"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=comments

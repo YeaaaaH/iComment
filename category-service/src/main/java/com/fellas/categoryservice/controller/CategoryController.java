@@ -25,6 +25,11 @@ public class CategoryController {
         this.service = service;
     }
 
+    @GetMapping("hello")
+    public String sayHello() {
+        return "Hello from Docker! ;)";
+    }
+
     @GetMapping("{id}")
     public Category getById(@PathVariable("id") long id) throws CategoryNotFoundException {
         return service.findCategoryById(id);

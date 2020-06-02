@@ -26,6 +26,11 @@ public class RolesController {
         this.service = service;
     }
 
+    @GetMapping("hello")
+    public String sayHello() {
+        return "Hello from Docker! ;)";
+    }
+
     @GetMapping("{id}")
     public Role getById(@PathVariable("id") long id) throws RoleNotFoundException {
         return service.findRoleById(id);

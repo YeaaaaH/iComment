@@ -24,6 +24,11 @@ public class FeedBackController {
         this.service = service;
     }
 
+    @GetMapping("hello")
+    public String sayHello() {
+        return "Hello from Docker! ;)";
+    }
+
     @GetMapping("{id}")
     public FeedBack getById(@PathVariable("id") long id) throws FeedbackNotFoundException {
         return service.findFeedbackById(id);
